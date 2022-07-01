@@ -14,3 +14,4 @@ yarn-error.log
 /.vscode
 
 laravel\prosto-films\Content\Resources\kinopoisk\IMG\posters
+\~\$*.xlsx
