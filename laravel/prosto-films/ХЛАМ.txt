@@ -1,1 +1,4 @@
 npm run watch
+
+    mix.browserSync ('127.0.0.1:8000');
+// mix.browserSync({ proxy: '127.0.0.1:8000'});
