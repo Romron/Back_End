@@ -16,5 +16,6 @@ mix.postCss('resources/css/app.css', 'public/css', [
         //
     ]);
 
-    mix.browserSync ('127.0.0.1:8000');
+    mix.browserSync ('127.0.0.1:8000/');        // без / в канце отслеживает толька стартовую страницу
+                                                //  с /  отслеживает все страницы домена
 // mix.browserSync({ proxy: '127.0.0.1:8000'});
