@@ -18,17 +18,71 @@ class DatabaseSeeder_films extends Seeder
     public function run()
     {
 
+        // $count_producer = 0;
+
         $arr_date_from_json = get_arr_from_json_file("storage/Content/Resources/kinopoisk/json/result_DateAboutAllFilms .json") ;
-        for ($i=1; $i < count($arr_date_from_json); $i++) { 
+        for ($count_producer = $count_film = 1; $count_film < count($arr_date_from_json); $count_film++) { 
+            // DB::table('films')->insert([
+            //     'id_film' => $arr_date_from_json[$count_film]['Id_kinopisk'],
+            //     'Title_Film' => $arr_date_from_json[$count_film]['Title'],
+            //     'Duration' => $arr_date_from_json[$count_film]['Duration'],
+            //     'CashFilm' => $arr_date_from_json[$count_film]['CashFilm'],
+            //     'RatingIMDb' =>$arr_date_from_json[$count_film]['RatingIMDb'],
+            //     'WorldPremiere' => $arr_date_from_json[$count_film]['WorldPremiere'],
+            //     'ProductionYear' => $arr_date_from_json[$count_film]['ProductionYear'],
+            // ]);
+        
+            // echo '$count_producer = ' . $count_producer;
+            
+        if (is_string($arr_date_from_json[$count_film]['Producer'])) {
+           
             DB::table('films')->insert([
-                'id_film' => $arr_date_from_json[$i]['Id_kinopisk'],
-                'Title_Film' => $arr_date_from_json[$i]['Title'],
-                'Duration' => $arr_date_from_json[$i]['Duration'],
-                'CashFilm' => $arr_date_from_json[$i]['CashFilm'],
-                'RatingIMDb' =>$arr_date_from_json[$i]['RatingIMDb'],
-                'WorldPremiere' => $arr_date_from_json[$i]['WorldPremiere'],
-                'ProductionYear' => $arr_date_from_json[$i]['ProductionYear'],
-          ]);
+                'id_film' => $arr_date_from_json[$count_film]['Id_kinopisk'],
+                'Title_Film' => $arr_date_from_json[$count_film]['Title'],
+                'Duration' => $arr_date_from_json[$count_film]['Duration'],
+                'CashFilm' => $arr_date_from_json[$count_film]['CashFilm'],
+                'RatingIMDb' =>$arr_date_from_json[$count_film]['RatingIMDb'],
+                'WorldPremiere' => $arr_date_from_json[$count_film]['WorldPremiere'],
+                'ProductionYear' => $arr_date_from_json[$count_film]['ProductionYear'],
+                'id_producer' => $count_producer
+            ]);           
+           
+            DB::table('producers_list')->insert([
+                'name_producer' => $arr_date_from_json[$count_film]['Producer']
+            ]);	 
+
+            $count_producer++;
+        }elseif(is_array($arr_date_from_json[$count_film]['Producer'])){
+            for ($q=0; $q < count($arr_date_from_json[$count_film]['Producer']); $q++) { 
+                DB::table('films')->insert([
+                    'id_film' => $arr_date_from_json[$count_film]['Id_kinopisk'],
+                    'Title_Film' => $arr_date_from_json[$count_film]['Title'],
+                    'Duration' => $arr_date_from_json[$count_film]['Duration'],
+                    'CashFilm' => $arr_date_from_json[$count_film]['CashFilm'],
+                    'RatingIMDb' =>$arr_date_from_json[$count_film]['RatingIMDb'],
+                    'WorldPremiere' => $arr_date_from_json[$count_film]['WorldPremiere'],
+                    'ProductionYear' => $arr_date_from_json[$count_film]['ProductionYear'],
+                    'id_producer' => $count_producer
+                ]);           
+               
+                DB::table('producers_list')->insert([
+                    'name_producer' => $arr_date_from_json[$count_film]['Producer'][$q]
+                ]);
+
+                $count_producer++;
+            }
+        }else {
+            echo($count_film . '.   In producers_list Something went wrong!');
+        }
+
+        
+        
+        
+        
+        
+        
+        
+        
         }
     }
 }

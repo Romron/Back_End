@@ -24,6 +24,10 @@ return new class extends Migration
             $table->string('WorldPremiere');
             $table->string('ProductionYear');
 
+            $table->bigInteger('id_producer')->unsigned();
+            $table->foreign('id_producer')->references('id_producer')->on('producers_list');
+
+
             $table->timestamps();
         });
     }

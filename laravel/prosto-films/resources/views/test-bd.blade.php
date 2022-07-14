@@ -16,8 +16,9 @@
    
 
 	$arr_date_from_json = get_arr_from_json_file("result_DateAboutAllFilms  TEST .json") ;
-	for ($i=1; $i < count($arr_date_from_json); $i++) { 
-			echo($i . '.  ');
+	for ($count_producer = $i = 1; $i < count($arr_date_from_json); $i++) { 
+			echo($i . '. $i   ');
+			echo($count_producer);
 		if (is_array($arr_date_from_json[$i]['Producer'])) {
 			for ($q=0; $q < count($arr_date_from_json[$i]['Producer']); $q++) { 
 					echo "array: <pre>";
@@ -30,6 +31,8 @@
 			echo "</pre>"; 		
 		}
 		
+		$count_producer = $count_producer + 2;
+	
 	}
 
 
