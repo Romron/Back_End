@@ -15,7 +15,7 @@ return new class extends Migration
     {
         Schema::create('film_actor', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('id_film')->unique();
+            $table->bigInteger('id_film')/*->unique()*/;
             $table->bigInteger('id_actor')->unique();
 
             $table->timestamps();
